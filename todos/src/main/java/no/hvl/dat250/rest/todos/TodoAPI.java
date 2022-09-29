@@ -42,7 +42,7 @@ public class TodoAPI {
             Todo todo = getTodo(param);
 
             resp.body(todo == null
-                    ? "Todo with the id  \"" + param + "\" not found!"
+                    ? "Todo with the id \"" + param + "\" not found!"
                     : gson.toJson(todo));
 
             return resp;
@@ -69,7 +69,7 @@ public class TodoAPI {
             Todo todo = getTodo(param);
 
             if (todo == null) {
-                resp.body("Todo with the id  \"" + param + "\" not found!");
+                resp.body("Todo with the id \"" + param + "\" not found!");
                 return resp;
             }
 
@@ -95,7 +95,7 @@ public class TodoAPI {
             Todo todo = getTodo(param);
 
             if(todo == null){
-                resp.body("Todo with the id  \"" + param + "\" not found!");
+                resp.body("Todo with the id \"" + param + "\" not found!");
                 return resp;
             }
 
