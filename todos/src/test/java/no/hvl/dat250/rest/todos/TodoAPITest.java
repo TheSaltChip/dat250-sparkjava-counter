@@ -3,7 +3,11 @@ package no.hvl.dat250.rest.todos;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import okhttp3.*;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -186,29 +190,29 @@ public class TodoAPITest {
         assertThat(todosBeforeDelete.size() - 1, is(todosAfterDelete.size()));
     }
 
-    private void doDeleteRequest(Long todoId) {
+    private String doDeleteRequest(Long todoId) {
         Request request = new Request.Builder()
                 .url(BASE_URL + "todos/" + todoId)
                 .delete()
                 .build();
 
-        doRequest(request);
+        return doRequest(request);
     }
 
     @Test
     public void testNonExistingTodo() {
         final long todoId = 9999L;
         // Execute get request
-        final String result = doGetRequest(todoId);
+        String result = doGetRequest(todoId);
 
         // Expect a appropriate result message.
-        assertThat(result, is(String.format("Todo with the id  \"%s\" not found!", todoId)));
+        assertThat(result, is(String.format("Todo with the id \"%s\" not found!", todoId)));
 
         // Execute delete request
-        doDeleteRequest(todoId);
+        result = doDeleteRequest(todoId);
 
         // Expect a appropriate result message.
-        assertThat(result, is(String.format("Todo with the id  \"%s\" not found!", todoId)));
+        assertThat(result, is(String.format("Todo with the id \"%s\" not found!", todoId)));
     }
 
     @Test
